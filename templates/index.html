@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Contacts</h1>
+
+        <!-- Add contact form -->
+        <div class="form-card">
+            <h2>Add a contact</h2>
+            <input type="text" id="name" placeholder="Name" />
+            <input type="text" id="email" placeholder="Email" />
+            <input type="text" id="phone" placeholder="Phone (optional)" />
+            <button onclick="addContact()">Add contact</button>
+        </div>
+
+        <!-- Contacts list -->
+        <div id="contacts-list"></div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
