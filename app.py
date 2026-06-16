@@ -70,6 +70,26 @@ def delete_contact(contact_id):
         return jsonify({'error': 'Contact not found'}), 404
     return jsonify({'message': 'Contact deleted'}), 200
 
+@app.route('/contacts/<int:contact_id>', methods=['PUT'])
+def update_contact(contact_id):
+    data = request.get_json()
+
+    if not data or 'name' not in data or 'email' not in data:
+        return jsonify({'error': 'Name and email are required'}), 400
+
+    conn = get_db()
+    result = conn.execute(
+        'UPDATE contacts SET name = ?, email = ?, phone = ? WHERE id = ?',
+        (data['name'], data['email'], data.get('phone', ''), contact_id)
+    )
+    conn.commit()
+    conn.close()
+
+    if result.rowcount == 0:
+        return jsonify({'error': 'Contact not found'}), 404
+
+    return jsonify({'id': contact_id, 'name': data['name'], 'email': data['email'], 'phone': data.get('phone', '')})
+
 if __name__ == '__main__':
     init_db()
     app.run(debug=True)
